@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compagnie Bien-être à Domicile – Marie Marques</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --violet: #4a2e7a;
+    --violet-light: #7a5aa8;
+    --violet-pale: #e8e0f5;
+    --olive: #6b7c3a;
+    --olive-light: #8fa44d;
+    --olive-pale: #eef2e0;
+    --cream: #faf8f3;
+    --beige: #f0ece0;
+    --text: #2d2a35;
+    --text-muted: #6b6673;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 3rem;
+    background: rgba(250,248,243,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(74,46,122,0.1);
+    transition: box-shadow .3s;
+  }
+  nav.scrolled { box-shadow: 0 4px 30px rgba(74,46,122,0.08); }
+  .nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--violet);
+    letter-spacing: .02em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: .85rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--violet); }
+  .nav-cta {
+    background: var(--violet);
+    color: #fff !important;
+    padding: .55rem 1.4rem;
+    border-radius: 50px;
+    transition: background .2s !important;
+  }
+  .nav-cta:hover { background: var(--olive) !important; color: #fff !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 3rem 5rem 5rem;
+    position: relative;
+  }
+  .hero-left::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -20%;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--violet-pale) 0%, transparent 70%);
+    z-index: 0;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    background: var(--olive-pale);
+    color: var(--olive);
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    padding: .5rem 1.2rem;
+    border-radius: 50px;
+    width: fit-content;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp .8s ease both;
+  }
+  .hero-tag::before { content: '🌿'; font-size: 1rem; }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 4.8rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--violet);
+    position: relative;
+    z-index: 1;
+    animation: fadeUp .8s .15s ease both;
+  }
+  .hero-title em {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--olive);
+  }
+  .hero-subtitle {
+    margin: 1.8rem 0 2.5rem;
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--text-muted);
+    max-width: 480px;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp .8s .3s ease both;
+  }
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--violet-light);
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp .8s .35s ease both;
+  }
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp .8s .45s ease both;
+  }
+  .btn-primary {
+    background: var(--violet);
+    color: #fff;
+    padding: .9rem 2.2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: .9rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    transition: all .3s;
+    box-shadow: 0 8px 25px rgba(74,46,122,.25);
+  }
+  .btn-primary:hover {
+    background: var(--olive);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(107,124,58,.3);
+  }
+  .btn-secondary {
+    color: var(--violet);
+    padding: .9rem 2.2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: .9rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    border: 2px solid var(--violet);
+    transition: all .3s;
+  }
+  .btn-secondary:hover {
+    background: var(--violet-pale);
+    transform: translateY(-2px);
+  }
+  .hero-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--violet-pale) 0%, var(--olive-pale) 100%);
+    overflow: hidden;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234a2e7a' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-card {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 4rem 3rem;
+    animation: fadeIn 1.2s .5s ease both;
+  }
+  .hero-house-icon {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 2.5rem;
+    position: relative;
+  }
+  .hero-house-icon svg { width: 100%; height: 100%; }
+  .hero-pillars {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  .pillar {
+    text-align: center;
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--violet);
+    position: relative;
+  }
+  .pillar::after {
+    content: '•';
+    position: absolute;
+    right: -1.2rem;
+    top: 0;
+    color: var(--olive);
+  }
+  .pillar:last-child::after { display: none; }
+  .hero-name-badge {
+    margin-top: 3rem;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .3rem;
+    background: #fff;
+    border-radius: 20px;
+    padding: 1.5rem 3rem;
+    box-shadow: 0 20px 60px rgba(74,46,122,.12);
+  }
+  .hero-name-badge .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--violet);
+  }
+  .hero-name-badge .role {
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--olive);
+  }
+
+  /* ── SERVICES ── */
+  .section { padding: 6rem 5rem; }
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .section-tag {
+    display: inline-block;
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--olive);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+    font-weight: 300;
+    color: var(--violet);
+    line-height: 1.15;
+  }
+  .section-title em { font-style: italic; font-weight: 600; }
+  .section-lead {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+  .service-card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: 0 4px 24px rgba(74,46,122,.06);
+    transition: all .4s cubic-bezier(.23,1,.32,1);
+    border: 1px solid transparent;
+    cursor: default;
+  }
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(74,46,122,.14);
+    border-color: var(--violet-pale);
+  }
+  .service-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+  }
+  .icon-violet { background: var(--violet-pale); }
+  .icon-olive  { background: var(--olive-pale); }
+  .service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--violet);
+    margin-bottom: .8rem;
+    line-height: 1.2;
+  }
+  .service-card p {
+    font-size: .875rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* ── ABOUT ── */
+  .about-section {
+    background: var(--beige);
+    padding: 6rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .about-visual {
+    position: relative;
+  }
+  .about-quote-block {
+    background: var(--violet);
+    border-radius: 28px;
+    padding: 3.5rem;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-quote-block::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12rem;
+    line-height: .7;
+    color: rgba(255,255,255,.1);
+    position: absolute;
+    top: 1rem;
+    left: 1.5rem;
+  }
+  .about-quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 1.5rem;
+  }
+  .about-quote-author {
+    font-size: .85rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.7);
+    position: relative;
+    z-index: 1;
+  }
+  .about-leaf-tag {
+    position: absolute;
+    bottom: -2rem;
+    right: 2rem;
+    background: var(--olive);
+    color: #fff;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    box-shadow: 0 8px 30px rgba(107,124,58,.3);
+  }
+  .about-content {}
+  .about-content .section-tag { text-align: left; display: block; }
+  .about-content .section-title { text-align: left; }
+  .about-body {
+    margin-top: 1.5rem;
+    font-size: .95rem;
+    line-height: 1.9;
+    color: var(--text-muted);
+  }
+  .about-values {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .8rem;
+  }
+  .value-chip {
+    background: #fff;
+    border: 2px solid var(--violet-pale);
+    color: var(--violet);
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: .55rem 1.3rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
+  .value-chip::before { content: '♥'; color: var(--olive); }
+
+  /* ── OBJECTIF ── */
+  .objectif-band {
+    background: linear-gradient(135deg, var(--olive) 0%, var(--olive-light) 100%);
+    padding: 4rem 5rem;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .objectif-band::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -10%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.05);
+  }
+  .objectif-band p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+    font-weight: 300;
+    line-height: 1.5;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .objectif-band span { font-style: italic; font-weight: 600; }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    padding: 6rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .contact-info .section-tag { display: block; text-align: left; }
+  .contact-info .section-title { text-align: left; }
+  .contact-lead { text-align: left; margin-left: 0; }
+  .contact-items { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.2rem; }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(74,46,122,.06);
+    transition: transform .3s;
+  }
+  .contact-item:hover { transform: translateX(6px); }
+  .contact-item-link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  .contact-item-link:hover {
+    background: var(--violet);
+    box-shadow: 0 8px 30px rgba(74,46,122,.2);
+  }
+  .contact-item-link:hover .contact-item-label { color: rgba(255,255,255,.7); }
+  .contact-item-link:hover .contact-item-value { color: #fff; }
+  .contact-item-link:hover .contact-item-icon { background: rgba(255,255,255,.2); }
+  .contact-item-link:hover .contact-item-arrow { opacity: 1; transform: translateX(0); }
+  .contact-item-arrow {
+    margin-left: auto;
+    font-size: 1.2rem;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all .3s;
+    color: #fff;
+  }
+  .contact-item-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+  .ci-violet { background: var(--violet-pale); }
+  .ci-olive  { background: var(--olive-pale); }
+  .contact-item-label {
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .contact-item-value {
+    font-size: .95rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-top: .15rem;
+  }
+  .contact-form-card {
+    background: #fff;
+    border-radius: 28px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 40px rgba(74,46,122,.1);
+  }
+  .contact-form-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--violet);
+    margin-bottom: 1.5rem;
+  }
+  .form-group { margin-bottom: 1.2rem; }
+  .form-group label {
+    display: block;
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: .5rem;
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: .85rem 1.2rem;
+    border: 2px solid var(--violet-pale);
+    border-radius: 12px;
+    font-family: 'Lato', sans-serif;
+    font-size: .9rem;
+    color: var(--text);
+    background: var(--cream);
+    outline: none;
+    transition: border-color .2s;
+    appearance: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--violet);
+  }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .btn-submit {
+    width: 100%;
+    padding: 1rem;
+    background: var(--violet);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Lato', sans-serif;
+    font-size: .9rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all .3s;
+    box-shadow: 0 8px 25px rgba(74,46,122,.25);
+  }
+  .btn-submit:hover {
+    background: var(--olive);
+    transform: translateY(-2px);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--violet);
+    color: rgba(255,255,255,.7);
+    padding: 3rem 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+  }
+  .footer-brand small {
+    display: block;
+    font-family: 'Lato', sans-serif;
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.5);
+    margin-top: .2rem;
+  }
+  .footer-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,.8);
+  }
+  .footer-copy {
+    font-size: .8rem;
+    letter-spacing: .05em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2,1fr); }
+    .hero, .about-section, .contact-section { grid-template-columns: 1fr; }
+    .hero-right { min-height: 400px; }
+    .section, .about-section, .contact-section { padding: 4rem 2rem; }
+    footer { padding: 2rem; flex-direction: column; text-align: center; }
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .contact-info .section-tag,
+    .contact-info .section-title,
+    .contact-lead { text-align: center !important; margin-left: auto !important; margin-right: auto !important; }
+    .contact-items { max-width: 480px; margin-left: auto; margin-right: auto; width: 100%; }
+    .contact-form-card { max-width: 480px; margin-left: auto; margin-right: auto; }
+  }
+  @media (max-width: 600px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .hero-left { padding: 3rem 1.5rem; }
+    .objectif-band { padding: 3rem 2rem; }
+    .contact-section { padding: 3rem 1.2rem; }
+    .contact-items { max-width: 100%; }
+    .contact-form-card { max-width: 100%; padding: 1.8rem 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-brand">Compagnie Bien-être à Domicile</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#contact" class="nav-cta">Me contacter</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <span class="hero-tag">Accompagnement à domicile</span>
+    <h1 class="hero-title">
+      Compagnie<br>
+      <em>Bien-être</em><br>
+      à Domicile
+    </h1>
+    <p class="hero-tagline">Une présence bienveillante, un quotidien plus serein.</p>
+    <p class="hero-subtitle">
+      J'accompagne les personnes âgées au quotidien avec douceur, respect et bienveillance — pour préserver leur autonomie et enrichir leur vie sociale.
+    </p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-primary">Prendre contact</a>
+      <a href="#services" class="btn-secondary">Mes services</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card">
+      <!-- House + people SVG inspired by logo -->
+      <div class="hero-house-icon">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- House roof -->
+          <path d="M100 20 L175 80 L155 80 L155 160 L45 160 L45 80 L25 80 Z" fill="none" stroke="#4a2e7a" stroke-width="5" stroke-linejoin="round"/>
+          <!-- Heart -->
+          <path d="M100 140 C100 140 75 122 75 108 C75 100 82 94 90 97 C94 98 97 101 100 104 C103 101 106 98 110 97 C118 94 125 100 125 108 C125 122 100 140 100 140Z" fill="#4a2e7a" opacity=".2"/>
+          <path d="M100 138 C100 138 76 121 76 108 C76 101 83 95 91 98 C95 99 98 102 100 105 C102 102 105 99 109 98 C117 95 124 101 124 108 C124 121 100 138 100 138Z" fill="#6b7c3a" opacity=".6"/>
+          <!-- Two people silhouette -->
+          <!-- Person 1 -->
+          <circle cx="82" cy="72" r="10" fill="#4a2e7a" opacity=".7"/>
+          <path d="M68 115 C68 95 96 95 96 115" fill="#4a2e7a" opacity=".7"/>
+          <!-- Person 2 -->
+          <circle cx="115" cy="68" r="10" fill="#6b7c3a" opacity=".7"/>
+          <path d="M101 115 C101 93 129 93 129 115" fill="#6b7c3a" opacity=".7"/>
+          <!-- Leaves -->
+          <path d="M160 90 Q170 75 160 65 Q155 75 160 90Z" fill="#8fa44d" opacity=".7"/>
+          <path d="M165 100 Q178 88 170 78 Q163 90 165 100Z" fill="#6b7c3a" opacity=".5"/>
+        </svg>
+      </div>
+      <div class="hero-pillars">
+        <span class="pillar">Présence</span>
+        <span class="pillar">Bienveillance</span>
+        <span class="pillar">Autonomie</span>
+      </div>
+      <div class="hero-name-badge">
+        <span class="name">Marie Marques</span>
+        <span class="role">Auto-entrepreneure</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-header">
+    <span class="section-tag">Ce que je propose</span>
+    <h2 class="section-title">Je vous accompagne au quotidien<br><em>avec bienveillance et respect</em></h2>
+    <p class="section-lead">Chaque service est pensé pour préserver votre autonomie et enrichir votre quotidien.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon icon-violet">🤝</div>
+      <h3>Compagnie & Présence</h3>
+      <p>Écoute, discussion, partage de moments conviviaux. Parce qu'une présence chaleureuse fait toute la différence.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon icon-olive">🧠</div>
+      <h3>Stimulation Cognitive</h3>
+      <p>Jeux mémoire, activités manuelles, lecture, conversation… pour maintenir l'éveil et le plaisir intellectuel.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon icon-violet">🌿</div>
+      <h3>Promenades & Sorties</h3>
+      <p>Balades au parc, courses accompagnées, sorties culturelles… pour rester actif et connecté à la vie.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon icon-olive">📅</div>
+      <h3>Accompagnement Rendez-vous</h3>
+      <p>Accompagnement aux rendez-vous médicaux, démarches administratives, contrôles… en toute sérénité.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OBJECTIF BAND -->
+<div class="objectif-band">
+  <p>Mon objectif : <span>préserver le lien social, stimuler l'autonomie</span> et améliorer le bien-être au quotidien. 🌿</p>
+</div>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-visual">
+    <div class="about-quote-block">
+      <p class="about-quote-text">Un accompagnement humain et bienveillant au quotidien</p>
+      <p class="about-quote-author">Compagnie Bien-être à Domicile</p>
+    </div>
+    <div class="about-leaf-tag">🌿</div>
+  </div>
+  <div class="about-content">
+    <span class="section-tag">À propos de moi</span>
+    <h2 class="section-title"><em>Marie Marques</em>,<br>à votre service</h2>
+    <p class="about-body">
+      Auto-entrepreneure passionnée par l'accompagnement des personnes âgées, je mets toute mon attention et mon énergie au service de votre bien-être. Chaque personne mérite une présence attentive, respectueuse et adaptée à ses besoins.
+      <br><br>
+      Ma démarche est simple : être là, vraiment, avec écoute et bienveillance — pour que chaque journée soit un peu plus douce et plus sereine.
+    </p>
+    <div class="about-values">
+      <span class="value-chip">Écoute</span>
+      <span class="value-chip">Respect</span>
+      <span class="value-chip">Bienveillance</span>
+      <span class="value-chip">Autonomie</span>
+      <span class="value-chip">Présence</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-info">
+    <span class="section-tag">Me contacter</span>
+    <h2 class="section-title">Parlons de vos<br><em>besoins ensemble</em></h2>
+    <p class="section-lead contact-lead">N'hésitez pas à me contacter pour en savoir plus sur mes services ou pour convenir d'un premier échange.</p>
+    <div class="contact-items">
+      <a class="contact-item contact-item-link" href="tel:+33662573646">
+        <div class="contact-item-icon ci-violet">📞</div>
+        <div>
+          <div class="contact-item-label">Téléphone</div>
+          <div class="contact-item-value">06 62 57 36 46</div>
+        </div>
+        <span class="contact-item-arrow">→</span>
+      </a>
+      <a class="contact-item contact-item-link" href="mailto:Marie.marques2009@gmail.com">
+        <div class="contact-item-icon ci-olive">✉️</div>
+        <div>
+          <div class="contact-item-label">Email</div>
+          <div class="contact-item-value">Marie.marques2009@gmail.com</div>
+        </div>
+        <span class="contact-item-arrow">→</span>
+      </a>
+      <a class="contact-item contact-item-link" href="https://www.google.com/maps/place/Seine-et-Marne/@48.6180172,2.3163492,9z/data=!3m1!4b1!4m6!3m5!1s0x47ef520a9c79966b:0x30b82c3688b2a50!8m2!3d48.841082!4d2.999366!16zL20vMG1obHE?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">
+        <div class="contact-item-icon ci-violet">📍</div>
+        <div>
+          <div class="contact-item-label">Secteur</div>
+          <div class="contact-item-value">Seine-et-Marne (77) & alentours</div>
+        </div>
+        <span class="contact-item-arrow">→</span>
+      </a>
+    </div>
+  </div>
+  <div class="contact-form-card">
+    <h3>Envoyez-moi un message</h3>
+    <div class="form-group">
+      <label>Votre nom</label>
+      <input type="text" placeholder="Marie Marques">
+    </div>
+    <div class="form-group">
+      <label>Téléphone</label>
+      <input type="tel" placeholder="06 XX XX XX XX">
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" placeholder="votre@email.fr">
+    </div>
+    <div class="form-group">
+      <label>Je suis</label>
+      <select>
+        <option>La personne concernée</option>
+        <option>Un proche / aidant familial</option>
+        <option>Un professionnel de santé</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Votre message</label>
+      <textarea placeholder="Décrivez brièvement votre besoin…"></textarea>
+    </div>
+    <button class="btn-submit">Envoyer ma demande</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    Compagnie Bien-être à Domicile
+    <small>Marie Marques · Auto-entrepreneure</small>
+  </div>
+  <p class="footer-tagline">Écoute · Respect · Bienveillance ♥</p>
+  <p class="footer-copy">© 2025 · Tous droits réservés</p>
+</footer>
+
+<script>
+  // Sticky nav shadow on scroll
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .contact-item, .about-quote-block').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity .6s ease, transform .6s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
